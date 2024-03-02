@@ -1,6 +1,6 @@
 const express = require('express');
 const client = require('prom-client');
-
+const bodyParser=require('body-parser')
 const app = express();
 
 const register = new client.Registry();
@@ -13,7 +13,8 @@ const meters = {};
 const buildingMeters = {};
 
 
-app.use(express.json());
+// app.use(express.json());
+app.use(bodyParser.json())
 
 
 app.post('/meter_reading', (req, res) => {

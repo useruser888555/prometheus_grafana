@@ -40,8 +40,13 @@ app.post('/meter_reading', (req, res) => {
 
 
 app.post('/building_meter_reading', (req, res) => {
-  const { id, meterName, reading, timestamp } = req.body;
-
+  const { id, meterName, reading } = req.body;
+  const utcDate = new Date();
+  
+  const istDate = new Date(utcDate.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+ 
+  const timestamp=istDate.toLocaleString()
+  
   if (!id || !meterName || reading === undefined || !timestamp) {
     return res.status(400).send('Missing required fields: id, meterName, reading, timestamp');
   }
